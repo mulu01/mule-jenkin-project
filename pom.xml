@@ -26,21 +26,65 @@
 				<version>${mule.maven.plugin.version}</version>
 				<extensions>true</extensions>
 				<configuration>
-				<cloudHubDeployment>
-            <uri>https://anypoint.mulesoft.com</uri>
-            <muleVersion>${mule.version}</muleVersion>
-            <username>${username}</username>
-            <password>${password}</password>
-            <applicationName>${cloudhub.application.name}</applicationName>
-            <environment>${environment}</environment>
-            <properties>
-                <key>value</key>
-            </properties>
-        </cloudHubDeployment>
 				</configuration>
 			</plugin>
+
+
+			<!-- BEGINNING of Deploy to Cloudhub -->
+			<!-- mvn clean install deploy -Danypoint.us=mulu_ayele -Danypoint.pw=Nov@@2021@@ -Danypoint.env=Sandbox --> 
+			<plugin>
+				<groupId>org.mule.tools.maven</groupId>
+				<artifactId>mule-maven-plugin</artifactId>
+				<version>${mule.maven.plugin.version}</version>
+				<configuration>
+					<cloudHubDeployment>
+						<uri>https://anypoint.mulesoft.com</uri>
+						<muleVersion>${app.runtime}</muleVersion>
+						<username>${anypoint.us}</username>
+						<password>${anypoint.pw}</password>
+						<applicationName>mule-jenkin-2</applicationName>  <!--ANY NAME  ON CloudHub  APPLICATOINNAME -->
+						<environment>${anypoint.env}</environment>
+						<properties>
+							<key>value</key>
+						</properties>
+					</cloudHubDeployment>
+				</configuration>
+				<executions>
+					<execution>
+						<id>deploy</id>
+						<phase>deploy</phase>
+						<goals>
+							<goal>deploy</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin> 	 
+			<!-- End Deploy to Cloudhub -->
+
 		</plugins>
+
+
 	</build>
+
+<!-- BEGINNING of Deploy to Cloudhub -->
+	<distributionManagement>
+		<repository>
+			<uniqueVersion>false</uniqueVersion>
+			<id>corp1</id>
+			<name>Corporate Repository</name>
+			<url>file:///home/myfolder/.m2</url>
+			<layout>default</layout>
+		</repository>
+	</distributionManagement>
+
+<!-- End of Deploy to Cloudhub -->
 
 	<dependencies>
         <dependency>
